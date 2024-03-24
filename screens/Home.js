@@ -1,21 +1,97 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import {
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  Image,
+  Platform,
+} from "react-native";
 
-export default function Home() {
+import { auth } from "../firebaseConfig";
+import { getAuth, signOut } from "firebase/auth";
+import { useState, useEffect } from "react";
+const image = require("../assets/sport01.jpg");
+
+export default function Home({ navigation }) {
+  const [user, setUser] = useState("");
+  // const [user, setUser] = useState(auth.currentUser);
+  // useEffect(() => {
+  //   // Subscribe to authentication state changes
+  //   const unsubscribe = auth.getAuth((newUser) => {
+  //     setUser(newUser);
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
+
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
+  const navigateToCreate = () => navigation.navigate("Create");
+  const navigateToMain = () => navigation.navigate("Main");
+  const navigateToLogin = () => navigation.navigate("Login");
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.wrapper}>
+      <Image source={image} style={styles.image} resizeMode="contain" />
+      <Text style={styles.title}>Forme Alimentaire</Text>
+      {user ? (
+        <>
+          <TouchableOpacity onPress={navigateToMain}>
+            <Text style={styles.btnStyle}>Vos activités</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleLogout}>
+            <Text style={styles.btnText}>SE DECONNECTER</Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <>
+          <TouchableOpacity onPress={navigateToCreate}>
+            <Text style={styles.btnStyle}>Creer un compte</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={navigateToLogin}>
+            <Text style={styles.btnText}>SE CONNECTER</Text>
+          </TouchableOpacity>
+        </>
+      )}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    backgroundColor: "#f9faf4",
+  },
+  image: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+  title: {
+    color: "#E8664B",
+    fontSize: 35,
+  },
+  btnStyle: {
+    marginVertical: 30,
+    fontSize: 20,
+    textAlign: "center",
+    textAlignVertical: "center",
+    backgroundColor: "#E8664B",
+    color: "white",
+    borderRadius: 15,
+    padding: 6,
+    width: 190,
+  },
+  btnText: {
+    fontSize: 18,
+    fontWeight: "500",
+    textAlign: "center",
+    textAlignVertical: "center",
+    color: "#E8664B",
+    width: 190,
+    paddingBottom: 20,
   },
 });
