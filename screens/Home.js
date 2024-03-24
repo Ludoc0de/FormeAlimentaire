@@ -23,9 +23,9 @@ export default function Home({ navigation }) {
   //   return () => unsubscribe();
   // }, []);
 
-  const handleLogout = () => {
-    signOut(auth);
-  };
+  // const handleLogout = () => {
+  //   signOut(auth);
+  // };
 
   const navigateToCreate = () => navigation.navigate("Create");
   const navigateToMain = () => navigation.navigate("Main");
@@ -34,26 +34,15 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.wrapper}>
       <Image source={image} style={styles.image} resizeMode="contain" />
-      <Text style={styles.title}>Forme Alimentaire</Text>
-      {user ? (
-        <>
-          <TouchableOpacity onPress={navigateToMain}>
-            <Text style={styles.btnStyle}>Vos activités</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleLogout}>
-            <Text style={styles.btnText}>SE DECONNECTER</Text>
-          </TouchableOpacity>
-        </>
-      ) : (
-        <>
-          <TouchableOpacity onPress={navigateToCreate}>
-            <Text style={styles.btnStyle}>Creer un compte</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={navigateToLogin}>
-            <Text style={styles.btnText}>SE CONNECTER</Text>
-          </TouchableOpacity>
-        </>
-      )}
+      <Text style={styles.title}>Forme Alimentaire!</Text>
+      <TouchableOpacity onPress={navigateToMain}>
+        <Text style={styles.btnStyle}>SE CONNECTER</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={navigateToCreate}>
+        <Text style={styles.btnText}>
+          Vous n'avez pas de compte? S'inscrire
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -82,8 +71,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8664B",
     color: "white",
     borderRadius: 15,
-    padding: 6,
-    width: 190,
+    padding: 10,
+    width: 300,
   },
   btnText: {
     fontSize: 18,
@@ -91,7 +80,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     color: "#E8664B",
-    width: 190,
+    width: 300,
     paddingBottom: 20,
   },
 });
