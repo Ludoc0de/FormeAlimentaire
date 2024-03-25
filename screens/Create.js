@@ -6,6 +6,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 // const image = require("../assets/wave.png");
 // import LabeledTextInput from "./components/LabeledTextInput";
@@ -52,6 +53,11 @@ export default function Create({ navigation }) {
       {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}> */}
       <View style={styles.container}>
         <Text style={styles.title}>S'INSCRIRE</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={text}
+        />
         {/* <LabeledTextInput
           label="Email"
           value={email}
