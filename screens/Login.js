@@ -51,7 +51,7 @@ export default function Login({ navigation }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
-        <Text style={styles.title}>S'INSCRIRE</Text>
+        <Text style={styles.title}>SE CONNECTER</Text>
         <LabeledTextInput label="Email" value={email} onChange={setEmail} />
         <LabeledTextInput
           label="Mot de passe"
