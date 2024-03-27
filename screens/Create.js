@@ -11,7 +11,7 @@ import {
 // const image = require("../assets/wave.png");
 // import LabeledTextInput from "./components/LabeledTextInput";
 import { auth } from "../firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Create({ navigation }) {
   const [name, setName] = useState("");
@@ -19,35 +19,48 @@ export default function Create({ navigation }) {
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
 
-  const onPress = async () => {
-    try {
-      const resetForm = () => {
-        setEmail("");
-        setPassword("");
-        setVerifyPassword("");
-      };
-      if (!email || !password || !verifyPassword) {
-        console.log("not sending auth");
-        Alert.alert(
-          "Error",
-          "Missing required fields. Please fill in all fields."
-        );
-      } else if (password !== verifyPassword) {
-        console.log("password it's not the same ");
-        Alert.alert(
-          "Error",
-          "Password it's not the same. Please verify your password."
-        );
-      } else {
-        console.log("sending auth");
-        await createUserWithEmailAndPassword(auth, email, password);
-        resetForm();
-        Alert.alert("Success", "User acount created");
-        navigation.navigate("Login");
-      }
-    } catch (err) {
-      console.error(err);
-    }
+  const onPress = () => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        // ..
+      });
+    // try {
+    //   const resetForm = () => {
+    //     setEmail("");
+    //     setPassword("");
+    //     setVerifyPassword("");
+    //   };
+    //   if (!email || !password || !verifyPassword) {
+    //     console.log("not sending auth");
+    //     Alert.alert(
+    //       "Error",
+    //       "Missing required fields. Please fill in all fields."
+    //     );
+    //   } else if (password !== verifyPassword) {
+    //     console.log("password it's not the same ");
+    //     Alert.alert(
+    //       "Error",
+    //       "Password it's not the same. Please verify your password."
+    //     );
+    //   } else {
+    //     console.log("sending auth");
+    //     await createUserWithEmailAndPassword(auth, email, password);
+    //     resetForm();
+    //     Alert.alert("Success", "User acount created");
+    //     navigation.navigate("Login");
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
   return (
     <View style={styles.wrapper}>
