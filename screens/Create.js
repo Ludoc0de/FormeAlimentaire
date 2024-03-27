@@ -12,27 +12,52 @@ import {
 // import LabeledTextInput from "./components/LabeledTextInput";
 import { auth } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import LabeledTextInput from "./components/LabeledTextInput";
 
 export default function Create({ navigation }) {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
 
   const onPress = () => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        // ..
-      });
+    const resetForm = () => {
+      setEmail("");
+      setPassword("");
+      setVerifyPassword("");
+    };
+
+    const createUser = () => {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode);
+        });
+    };
+
+    if (!email || !password || !verifyPassword) {
+      console.log("not sending auth");
+      Alert.alert(
+        "Error",
+        "Missing required fields. Please fill in all fields."
+      );
+    } else if (password !== verifyPassword) {
+      console.log("password it's not the same ");
+      Alert.alert(
+        "Error",
+        "Password it's not the same. Please verify your password."
+      );
+    } else {
+      console.log("sending auth");
+      createUser();
+      resetForm();
+      Alert.alert("Success", "User acount created");
+      navigation.navigate("Login");
+    }
     // try {
     //   const resetForm = () => {
     //     setEmail("");
@@ -67,31 +92,25 @@ export default function Create({ navigation }) {
       {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}> */}
       <View style={styles.container}>
         <Text style={styles.title}>S'INSCRIRE</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setName}
-          value={name}
-          placeholder={"Votre nom"}
-        />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           onChangeText={setEmail}
           value={email}
           placeholder={"votre email"}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setPassword}
+        /> */}
+        <LabeledTextInput label="Email" value={email} onChange={setEmail} />
+        <LabeledTextInput
+          label="Mot de passe"
           value={password}
-          placeholder={"mot de passe"}
+          onChange={setPassword}
+          secure={true}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={setVerifyPassword}
+        <LabeledTextInput
+          label="Vérification du mot de passe"
           value={verifyPassword}
-          placeholder={"vérification du mot de passe"}
+          onChange={setVerifyPassword}
+          secure={true}
         />
-
         {/* <LabeledTextInput
           label="Email"
           value={email}
@@ -143,14 +162,9 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
   },
   title: {
-    // marginTop: 10,
     fontSize: 30,
     fontWeight: "bold",
-  },
-  input: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginTop: 40,
+    marginBottom: 40,
   },
   btnWrapper: {
     flexDirection: "row",
@@ -163,7 +177,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8664B",
     borderRadius: 10,
     padding: 6,
-    marginTop: 50,
+    marginTop: 40,
     width: 350,
   },
   btnText: {
