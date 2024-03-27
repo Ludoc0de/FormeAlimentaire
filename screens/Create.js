@@ -58,46 +58,12 @@ export default function Create({ navigation }) {
       Alert.alert("Success", "User acount created");
       navigation.navigate("Login");
     }
-    // try {
-    //   const resetForm = () => {
-    //     setEmail("");
-    //     setPassword("");
-    //     setVerifyPassword("");
-    //   };
-    //   if (!email || !password || !verifyPassword) {
-    //     console.log("not sending auth");
-    //     Alert.alert(
-    //       "Error",
-    //       "Missing required fields. Please fill in all fields."
-    //     );
-    //   } else if (password !== verifyPassword) {
-    //     console.log("password it's not the same ");
-    //     Alert.alert(
-    //       "Error",
-    //       "Password it's not the same. Please verify your password."
-    //     );
-    //   } else {
-    //     console.log("sending auth");
-    //     await createUserWithEmailAndPassword(auth, email, password);
-    //     resetForm();
-    //     Alert.alert("Success", "User acount created");
-    //     navigation.navigate("Login");
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    // }
   };
   return (
     <View style={styles.wrapper}>
       {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}> */}
       <View style={styles.container}>
         <Text style={styles.title}>S'INSCRIRE</Text>
-        {/* <TextInput
-          style={styles.input}
-          onChangeText={setEmail}
-          value={email}
-          placeholder={"votre email"}
-        /> */}
         <LabeledTextInput label="Email" value={email} onChange={setEmail} />
         <LabeledTextInput
           label="Mot de passe"
@@ -111,32 +77,6 @@ export default function Create({ navigation }) {
           onChange={setVerifyPassword}
           secure={true}
         />
-        {/* <LabeledTextInput
-          label="Email"
-          value={email}
-          placeholder={"votre email"}
-          onChange={setEmail}
-          textColor="#FF70BC"
-        />
-
-        <LabeledTextInput
-          label="Mot de passe"
-          value={password}
-          placeholder={"votre mot de passe"}
-          onChange={setPassword}
-          textColor="#FF70BC"
-          secure={true}
-        />
-
-        <LabeledTextInput
-          label="Vérifier le mot de passe"
-          value={verifyPassword}
-          placeholder={"c"}
-          onChange={setVerifyPassword}
-          textColor="#FF70BC"
-          secure={true}
-        /> */}
-
         <View style={styles.btnWrapper}>
           <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.btnText}>Création</Text>
