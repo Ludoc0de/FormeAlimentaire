@@ -8,7 +8,6 @@ import {
   TextInput,
 } from "react-native";
 // const image = require("../assets/wave.png");
-import { auth } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import LabeledTextInput from "./components/LabeledTextInput";
 
