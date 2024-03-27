@@ -28,14 +28,14 @@ export default function Home({ navigation }) {
   // };
 
   const navigateToCreate = () => navigation.navigate("Create");
-  const navigateToMain = () => navigation.navigate("Main");
+  // const navigateToMain = () => navigation.navigate("Main");
   const navigateToLogin = () => navigation.navigate("Login");
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <Image source={image} style={styles.image} resizeMode="contain" />
       <Text style={styles.title}>Forme Alimentaire!</Text>
-      <TouchableOpacity onPress={navigateToMain}>
+      <TouchableOpacity onPress={navigateToLogin}>
         <Text style={styles.btnStyle}>SE CONNECTER</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={navigateToCreate}>
