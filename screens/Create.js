@@ -14,6 +14,7 @@ import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function Create({ navigation }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
@@ -55,9 +56,29 @@ export default function Create({ navigation }) {
         <Text style={styles.title}>S'INSCRIRE</Text>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
+          onChangeText={setName}
+          value={name}
+          placeholder={"Votre nom"}
         />
+        <TextInput
+          style={styles.input}
+          onChangeText={setEmail}
+          value={email}
+          placeholder={"votre email"}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={setPassword}
+          value={password}
+          placeholder={"mot de passe"}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={setVerifyPassword}
+          value={verifyPassword}
+          placeholder={"vérification du mot de passe"}
+        />
+
         {/* <LabeledTextInput
           label="Email"
           value={email}
@@ -78,7 +99,7 @@ export default function Create({ navigation }) {
         <LabeledTextInput
           label="Vérifier le mot de passe"
           value={verifyPassword}
-          placeholder={"vérification du mot de passe"}
+          placeholder={"c"}
           onChange={setVerifyPassword}
           textColor="#FF70BC"
           secure={true}
@@ -105,15 +126,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f9faf4",
-    justifyContent: "space-evenly",
-    paddingLeft: 20,
+    justifyContent: "center",
+    paddingLeft: 30,
   },
   title: {
-    marginTop: 10,
+    // marginTop: 10,
     fontSize: 24,
     color: "#E8664B",
   },
-
+  input: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 40,
+  },
   btnWrapper: {
     flexDirection: "row",
     alignItems: "flex-end",
@@ -125,7 +150,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#E8664B",
     borderRadius: 10,
     padding: 6,
-    width: 120,
+    marginTop: 50,
+    width: 350,
   },
   btnText: {
     color: "white",
