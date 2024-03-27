@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import {
   Alert,
   StyleSheet,
-  ImageBackground,
   Text,
   View,
   TouchableOpacity,
   TextInput,
 } from "react-native";
 // const image = require("../assets/wave.png");
-// import LabeledTextInput from "./components/LabeledTextInput";
 import { auth } from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import LabeledTextInput from "./components/LabeledTextInput";
@@ -61,7 +59,6 @@ export default function Create({ navigation }) {
   };
   return (
     <View style={styles.wrapper}>
-      {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}> */}
       <View style={styles.container}>
         <Text style={styles.title}>S'INSCRIRE</Text>
         <LabeledTextInput label="Email" value={email} onChange={setEmail} />
@@ -83,7 +80,6 @@ export default function Create({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      {/* </ImageBackground> */}
     </View>
   );
 }
