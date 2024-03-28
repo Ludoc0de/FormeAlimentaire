@@ -10,6 +10,7 @@ import {
 // const image = require("../assets/wave.png");
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import LabeledTextInput from "./components/LabeledTextInput";
+import CustomButton from "./components/CustomButton";
 
 export default function Create({ navigation }) {
   const [email, setEmail] = useState("");
@@ -74,9 +75,14 @@ export default function Create({ navigation }) {
           secure={true}
         />
         <View style={styles.btnWrapper}>
-          <TouchableOpacity style={styles.button} onPress={onPress}>
+          <CustomButton
+            style={styles.button}
+            onPress={onPress}
+            text="Création"
+          />
+          {/* <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.btnText}>Création</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>
@@ -101,22 +107,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 40,
   },
-  btnWrapper: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    paddingRight: 24,
-  },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#E8664B",
-    borderRadius: 10,
-    padding: 6,
-    marginTop: 40,
-    width: 350,
-  },
-  btnText: {
-    color: "white",
-    fontSize: 20,
-  },
+  // btnWrapper: {
+  //   flexDirection: "row",
+  //   alignItems: "flex-end",
+  //   justifyContent: "space-between",
+  //   paddingRight: 24,
+  // },
+  // button: {
+  //   alignItems: "center",
+  //   backgroundColor: "#E8664B",
+  //   borderRadius: 10,
+  //   padding: 6,
+  //   marginTop: 40,
+  //   width: 350,
+  // },
+  // btnText: {
+  //   color: "white",
+  //   fontSize: 20,
+  // },
 });
