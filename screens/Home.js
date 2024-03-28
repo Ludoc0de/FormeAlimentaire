@@ -28,7 +28,7 @@ export default function Home({ navigation }) {
       <Text style={styles.title}>Forme Alimentaire!</Text>
       {user ? (
         <TouchableOpacity onPress={navigateToMain}>
-          <Text style={styles.btnStyle}>Objectif</Text>
+          <Text style={styles.btnStyle}>Objectif!</Text>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={navigateToLogin}>
