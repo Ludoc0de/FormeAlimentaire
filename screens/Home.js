@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { getAuth, signOut } from "firebase/auth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 const image = require("../assets/sport01.jpg");
 
 export default function Home({ navigation }) {
