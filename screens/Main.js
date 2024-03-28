@@ -9,5 +9,16 @@ import {
 } from "react-native";
 
 export default function Main() {
-  return <Text>Main</Text>;
+  return (
+    <View style={styles.wrapper}>
+      <Text>Création de votre profile utilisateur</Text>
+      <Text>Votre nom ?</Text>
+      <Text>Votre objectif ? Sèche ou Masse ?</Text>
+    </View>
+  );
 }
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
+});
