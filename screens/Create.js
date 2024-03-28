@@ -107,22 +107,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 40,
   },
-  // btnWrapper: {
-  //   flexDirection: "row",
-  //   alignItems: "flex-end",
-  //   justifyContent: "space-between",
-  //   paddingRight: 24,
-  // },
-  // button: {
-  //   alignItems: "center",
-  //   backgroundColor: "#E8664B",
-  //   borderRadius: 10,
-  //   padding: 6,
-  //   marginTop: 40,
-  //   width: 350,
-  // },
-  // btnText: {
-  //   color: "white",
-  //   fontSize: 20,
-  // },
 });
