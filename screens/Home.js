@@ -7,37 +7,34 @@ import {
   Platform,
 } from "react-native";
 
-import { auth } from "../firebaseConfig";
 import { getAuth, signOut } from "firebase/auth";
 import { useState, useEffect } from "react";
 const image = require("../assets/sport01.jpg");
 
 export default function Home({ navigation }) {
-  const [user, setUser] = useState("");
-  // const [user, setUser] = useState(auth.currentUser);
-  // useEffect(() => {
-  //   // Subscribe to authentication state changes
-  //   const unsubscribe = auth.getAuth((newUser) => {
-  //     setUser(newUser);
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
-
+  const auth = getAuth();
+  const [user, setUser] = useState(auth.currentUser);
   // const handleLogout = () => {
   //   signOut(auth);
   // };
 
-  const navigateToCreate = () => navigation.navigate("Create");
-  // const navigateToMain = () => navigation.navigate("Main");
   const navigateToLogin = () => navigation.navigate("Login");
+  const navigateToMain = () => navigation.navigate("Main");
+  const navigateToCreate = () => navigation.navigate("Create");
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <Image source={image} style={styles.image} resizeMode="contain" />
       <Text style={styles.title}>Forme Alimentaire!</Text>
-      <TouchableOpacity onPress={navigateToLogin}>
-        <Text style={styles.btnStyle}>SE CONNECTER</Text>
-      </TouchableOpacity>
+      {user ? (
+        <TouchableOpacity onPress={navigateToMain}>
+          <Text style={styles.btnStyle}>Objectif</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={navigateToLogin}>
+          <Text style={styles.btnStyle}>SE CONNECTER</Text>
+        </TouchableOpacity>
+      )}
       <TouchableOpacity onPress={navigateToCreate}>
         <Text style={styles.btnText}>
           Vous n'avez pas de compte? S'inscrire
