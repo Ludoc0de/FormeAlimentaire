@@ -80,9 +80,6 @@ export default function Create({ navigation }) {
             onPress={onPress}
             text="Création"
           />
-          {/* <TouchableOpacity style={styles.button} onPress={onPress}>
-            <Text style={styles.btnText}>Création</Text>
-          </TouchableOpacity> */}
         </View>
       </View>
     </View>
