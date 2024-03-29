@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import {
   Alert,
   StyleSheet,
@@ -8,46 +8,51 @@ import {
   TextInput,
 } from "react-native";
 // const image = require("../assets/wave.png");
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { auth } from "../firebaseConfig";
+import { getAuth } from "firebase/auth";
 import LabeledTextInput from "./components/LabeledTextInput";
+import { addDoc, collection } from "firebase/firestore";
 
-export default function Login({ navigation }) {
+export default function Main({ navigation }) {
   const [name, setName] = useState("");
   const [weight, setWeight] = useState("");
   const [fat, setFat] = useState("");
   // const [weight, setWeight] = useState("");
+  const database = getFirestore();
+  const userProfile = collection(database, "profile");
 
-  const onPress = () => {
-    const auth = getAuth();
-    const resetForm = () => {
-      setEmail("");
-      setPassword("");
-    };
+  const onPress = async () => {
+    try {
+      const resetForm = () => {
+        setName("");
+        setWeight("");
+        setFat("");
+      };
 
-    const profileUser = () => {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode);
-        });
-    };
+      const auth = getAuth();
+      const currentUser = await auth.currentUser; // Wait for user info
+      console.log(currentUser);
+      const createUserProfile = () => {
+        return {
+          name: name,
+          weight: weight,
+          fat: fat,
+          uid: uid,
+        };
+      };
 
-    if (!name || !weight) {
-      console.log("not sending auth");
-      Alert.alert(
-        "Error",
-        "Missing required fields. Please fill in all fields."
-      );
-    } else {
-      console.log("sending auth");
-      profilUser();
-      resetForm();
-      Alert.alert("Success", "User login");
-      navigation.navigate("Main");
+      if (currentUser) {
+        const uid = currentUser.uid;
+        await addDoc(userProfile, createUserProfile());
+        Alert.alert("Success", "User Profile data");
+        // resetForm();
+      } else {
+        console.log("No user is signed in");
+        // Handle case where no user is authenticated (e.g., redirect to login)
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
   return (
@@ -59,7 +64,6 @@ export default function Login({ navigation }) {
           label="Poids actuelle"
           value={weight}
           onChange={setWeight}
-          secure={true}
         />
         <LabeledTextInput
           label="Taux de graisse"
