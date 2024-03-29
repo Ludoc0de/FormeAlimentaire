@@ -31,25 +31,33 @@ export default function Main({ navigation }) {
       };
 
       const auth = getAuth();
-      const currentUser = await auth.currentUser; // Wait for user info
-      console.log(currentUser);
+      const currentUser = await auth.currentUser;
+      console.log("user", currentUser);
+
       const createUserProfile = () => {
+        const uid = currentUser.uid;
         return {
+          uid: uid,
           name: name,
           weight: weight,
           fat: fat,
-          uid: uid,
         };
       };
 
-      if (currentUser) {
-        const uid = currentUser.uid;
-        await addDoc(userProfile, createUserProfile());
-        Alert.alert("Success", "User Profile data");
-        // resetForm();
+      if (!name || !weight) {
+        console.log("not sending auth");
+        Alert.alert(
+          "Error",
+          "Missing required fields. Please fill in all fields."
+        );
       } else {
-        console.log("No user is signed in");
-        // Handle case where no user is authenticated (e.g., redirect to login)
+        console.log("sending auth");
+        const uid = currentUser.uid;
+        const profileData = createUserProfile(name, weight, fat, uid);
+        await addDoc(userProfile, profileData);
+        // resetForm();
+        Alert.alert("Success", "User Profile data");
+        // navigation.navigate("Main");
       }
     } catch (err) {
       console.error(err);
