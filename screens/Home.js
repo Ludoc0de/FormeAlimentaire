@@ -6,7 +6,7 @@ import {
   Image,
   Platform,
 } from "react-native";
-
+import { auth } from "../firebaseConfig";
 import { getAuth, signOut } from "firebase/auth";
 import { useState } from "react";
 const image = require("../assets/sport01.jpg");
@@ -14,6 +14,7 @@ const image = require("../assets/sport01.jpg");
 export default function Home({ navigation }) {
   const auth = getAuth();
   const [user, setUser] = useState(auth.currentUser);
+  console.log(user);
   // const handleLogout = () => {
   //   signOut(auth);
   // };
