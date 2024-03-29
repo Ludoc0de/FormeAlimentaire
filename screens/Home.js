@@ -14,7 +14,7 @@ const image = require("../assets/sport01.jpg");
 export default function Home({ navigation }) {
   const auth = getAuth();
   const [user, setUser] = useState(auth.currentUser);
-  console.log(user);
+  // console.log(user);
   // const handleLogout = () => {
   //   signOut(auth);
   // };
