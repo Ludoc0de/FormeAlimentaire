@@ -13,6 +13,7 @@ import { auth } from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
 import LabeledTextInput from "./components/LabeledTextInput";
 import { addDoc, collection } from "firebase/firestore";
+import CustomButton from "./components/CustomButton";
 
 export default function Main({ navigation }) {
   const [name, setName] = useState("");
@@ -82,6 +83,11 @@ export default function Main({ navigation }) {
           <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.btnText}>Ajouter</Text>
           </TouchableOpacity>
+          <CustomButton
+            style={styles.button}
+            onPress={() => navigation.navigate("Goal")}
+            text="Goal"
+          />
         </View>
       </View>
     </View>
@@ -107,7 +113,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   btnWrapper: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "flex-end",
     justifyContent: "space-between",
     paddingRight: 24,
