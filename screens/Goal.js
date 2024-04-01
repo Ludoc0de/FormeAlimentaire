@@ -28,10 +28,6 @@ export default function Reports() {
             ...doc.data(),
             id: doc.id,
           }));
-          // const filteredAuthData = filteredData.filter(
-          //   (AuthData) => AuthData.userId == authUserId
-          // );
-          // setReports(filteredAuthData);
           setProfiles(filteredData);
         } else {
           console.log("User is not authenticated.");
