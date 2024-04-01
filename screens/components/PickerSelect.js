@@ -38,17 +38,17 @@ export default function PickerSelect({
 
 const styles = StyleSheet.create({
   label: {
-    fontSize: 22,
+    fontSize: 18,
   },
   pickerContainer: {
     width: 350,
-    borderBottomWidth: 2.5,
+    borderBottomWidth: 2,
   },
   picker: {
     width: 350,
     marginLeft: -15,
   },
   pickerText: {
-    fontSize: 14,
+    fontSize: 16,
   },
 });
