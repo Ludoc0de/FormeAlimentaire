@@ -1,31 +1,42 @@
 import { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
 import { auth, database } from "../firebaseConfig";
-import { getDocs, collection, getFirestore } from "firebase/firestore";
+import {
+  get,
+  getDocs,
+  collection,
+  getFirestore,
+  where,
+  query,
+} from "firebase/firestore";
 import { SafeAreaView, Text, View, StyleSheet, ScrollView } from "react-native";
 
 export default function Reports() {
-  // const authUserId = auth.currentUser.uid;
-
   const [profiles, setProfiles] = useState([]);
-  // console.log("profiles", profiles);
   const database = getFirestore();
+  const auth = getAuth();
+  const authUserId = auth.currentUser.uid;
   const userProfile = collection(database, "profile");
-  console.log("userProfile", userProfile);
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const data = await getDocs(userProfile);
-        console.log("data", data);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        // const filteredAuthData = filteredData.filter(
-        //   (AuthData) => AuthData.userId == authUserId
-        // );
-        // setReports(filteredAuthData);
-        setProfiles(filteredData);
+        if (authUserId) {
+          const q = query(userProfile, where("uid", "==", authUserId));
+          const data = await getDocs(q);
+          const filteredData = data.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          // const filteredAuthData = filteredData.filter(
+          //   (AuthData) => AuthData.userId == authUserId
+          // );
+          // setReports(filteredAuthData);
+          setProfiles(filteredData);
+        } else {
+          console.log("User is not authenticated.");
+          setReports([]);
+        }
       } catch (err) {
         console.error(err);
       }
