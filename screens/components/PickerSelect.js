@@ -42,11 +42,7 @@ const styles = StyleSheet.create({
   },
   pickerContainer: {
     width: 350,
-    borderTopColor: "#f9faf4",
-    borderRightColor: "#f9faf4",
-    borderLeftColor: "#f9faf4",
-    borderBottomColor: "black",
-    borderWidth: 2.5,
+    borderBottomWidth: 2.5,
   },
   picker: {
     width: 350,
