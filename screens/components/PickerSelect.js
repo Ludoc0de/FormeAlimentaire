@@ -15,7 +15,7 @@ export default function PickerSelect({
       <Text style={styles.label}>{label}</Text>
       <Picker
         style={styles.picker}
-        dropdownIconColor="white"
+        dropdownIconColor="#E8664B"
         mode="dropdown"
         selectedValue={selectedValue}
         onValueChange={(itemValue, itemIndex) => {
@@ -39,19 +39,18 @@ export default function PickerSelect({
 const styles = StyleSheet.create({
   label: {
     fontSize: 22,
-    color: "white",
   },
   pickerContainer: {
-    width: 205,
-    borderBottomColor: "white",
-    borderWidth: 1,
+    width: 350,
+    borderTopColor: "#f9faf4",
+    borderRightColor: "#f9faf4",
+    borderLeftColor: "#f9faf4",
+    borderBottomColor: "black",
+    borderWidth: 2.5,
   },
   picker: {
-    width: 240,
+    width: 350,
     marginLeft: -15,
-    color: "white",
-    backgroundColor: "black",
-    borderColor: "black",
   },
   pickerText: {
     fontSize: 14,
