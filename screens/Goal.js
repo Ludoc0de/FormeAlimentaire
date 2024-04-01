@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import { auth, database } from "../firebaseConfig";
-import { getDocs, collection, serverTimestamp } from "firebase/firestore";
+import { getDocs, collection, getFirestore } from "firebase/firestore";
 import { SafeAreaView, Text, View, StyleSheet, ScrollView } from "react-native";
-import PickerSelect from "./components/PickerSelect";
 
 export default function Reports() {
-  const authUserId = auth.currentUser.uid;
+  // const authUserId = auth.currentUser.uid;
 
-  const [reports, setReports] = useState([]);
-  const profile = collection(database, "profile");
-  const [monthReport, setMonthReport] = useState();
-  const [yearReport, setYearReport] = useState();
-  // console.log(work on it);
-  // console.log(reports.map((report) => report.userId));
+  const [profiles, setProfiles] = useState([]);
+  // console.log("profiles", profiles);
+  const database = getFirestore();
+  const userProfile = collection(database, "profile");
+  console.log("userProfile", userProfile);
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const data = await getDocs(profile);
+        const data = await getDocs(userProfile);
+        console.log("data", data);
         const filteredData = data.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
@@ -26,29 +25,24 @@ export default function Reports() {
         //   (AuthData) => AuthData.userId == authUserId
         // );
         // setReports(filteredAuthData);
-        setReports(filteredData);
+        setProfiles(filteredData);
       } catch (err) {
         console.error(err);
       }
     };
     fetchReports();
-  }, [profile]);
+  }, [profiles]);
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>test</Text>
       <Text style={[styles.text, styles.customLastRapportText]}>test2</Text>
       <ScrollView>
-        {reports.map((report) => (
-          <View style={styles.lastReportContainer} key={report.id}>
-            <Text style={styles.lastReportText}>{report.name}</Text>
-            <Text style={styles.lastReportText}>
-              Rapport du: {report.selectedDate}
-            </Text>
-            <Text style={styles.lastReportText}>
-              Prédicateur: {report.preach ? " oui" : " non"}
-            </Text>
-            <Text style={styles.lastReportText}>Etude: {report.study}</Text>
+        {profiles.map((profile) => (
+          <View style={styles.lastReportContainer} key={profile.id}>
+            <Text style={styles.lastReportText}>{profile.name}</Text>
+            <Text style={styles.lastReportText}>Poids: {profile.weight}</Text>
+            <Text style={styles.lastReportText}>Graisse: {profile.fat}</Text>
           </View>
         ))}
       </ScrollView>
