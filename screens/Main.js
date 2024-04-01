@@ -14,14 +14,28 @@ import { getAuth } from "firebase/auth";
 import LabeledTextInput from "./components/LabeledTextInput";
 import { addDoc, collection } from "firebase/firestore";
 import CustomButton from "./components/CustomButton";
+import PickerSelect from "./components/PickerSelect";
 
 export default function Main({ navigation }) {
   const [name, setName] = useState("");
-  const [weight, setWeight] = useState("");
-  const [fat, setFat] = useState("");
+  const [weight, setWeight] = useState();
+  const [fat, setFat] = useState();
+  const [activity, setActivity] = useState();
   // const [weight, setWeight] = useState("");
   const database = getFirestore();
   const userProfile = collection(database, "profile");
+  const activityValues = [
+    { label: "Choisir la récurrence", value: "" },
+    { label: "pas de pratique sportive", value: 1.15 },
+    { label: "1 à 2 fois par semaine", value: 1.25 },
+    { label: "3 à 5 fois par semaine", value: 1.4 },
+    { label: "6 à 7 fois par semaine", value: 1.55 },
+    { label: "7 à 8 fois par semaine", value: 1.7 },
+  ];
+
+  const test = Math.round(
+    (370 + 21.6 * (1 - Number(fat / 100)) * Number(weight)) * Number(activity)
+  );
 
   const onPress = async () => {
     try {
@@ -73,12 +87,21 @@ export default function Main({ navigation }) {
           label="Poids actuelle"
           value={weight}
           onChange={setWeight}
+          keyboardType="numeric"
         />
         <LabeledTextInput
           label="Taux de graisse"
           value={fat}
           onChange={setFat}
+          keyboardType="numeric"
         />
+        <PickerSelect
+          label="Activité sportive"
+          selectedValue={activity}
+          onChange={setActivity}
+          items={activityValues}
+        />
+        <Text style={styles.title}>{test}</Text>
         <View style={styles.btnWrapper}>
           <CustomButton
             style={styles.button}
@@ -114,24 +137,24 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 40,
   },
-  btnWrapper: {
-    flexDirection: "column",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-    paddingRight: 24,
-  },
-  button: {
-    alignItems: "center",
-    backgroundColor: "#E8664B",
-    borderRadius: 10,
-    padding: 6,
-    marginTop: 40,
-    width: 350,
-  },
-  btnText: {
-    color: "white",
-    fontSize: 20,
-  },
+  // btnWrapper: {
+  //   flexDirection: "column",
+  //   alignItems: "flex-end",
+  //   justifyContent: "space-between",
+  //   paddingRight: 24,
+  // },
+  // button: {
+  //   alignItems: "center",
+  //   backgroundColor: "#E8664B",
+  //   borderRadius: 10,
+  //   padding: 6,
+  //   marginTop: 40,
+  //   width: 350,
+  // },
+  // btnText: {
+  //   color: "white",
+  //   fontSize: 20,
+  // },
 });
 
 // import React from "react";
