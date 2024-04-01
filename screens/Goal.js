@@ -42,14 +42,13 @@ export default function Reports() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>test</Text>
-      <Text style={[styles.text, styles.customLastRapportText]}>test2</Text>
+      <Text style={styles.title}>Historique</Text>
       <ScrollView>
         {profiles.map((profile) => (
-          <View style={styles.lastReportContainer} key={profile.id}>
-            <Text style={styles.lastReportText}>{profile.name}</Text>
-            <Text style={styles.lastReportText}>Poids: {profile.weight}</Text>
-            <Text style={styles.lastReportText}>Graisse: {profile.fat}</Text>
+          <View style={styles.reportContainer} key={profile.id}>
+            <Text style={styles.reportText}>{profile.name}</Text>
+            <Text style={styles.reportText}>Poids: {profile.weight}</Text>
+            <Text style={styles.reportText}>Graisse: {profile.fat}</Text>
           </View>
         ))}
       </ScrollView>
@@ -60,42 +59,22 @@ export default function Reports() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingLeft: 20,
-    backgroundColor: "black",
-    justifyContent: "space-evenly",
-    marginTop: -32,
+    backgroundColor: "#f9faf4",
+    justifyContent: "center",
+    paddingLeft: 30,
   },
   title: {
-    fontSize: 24,
-    color: "white",
+    fontSize: 30,
+    fontWeight: "bold",
+    marginVertical: 40,
   },
-  text: {
-    fontSize: 20,
-    color: "white",
+  reportContainer: {
+    width: 350,
+    borderBottomColor: "black",
+    borderBottomWidth: 2,
+    marginBottom: 40,
   },
-  pickerInput: {
-    fontSize: 18,
-    width: 205,
-    color: "pink",
-    borderColor: "transparent",
-    backgroundColor: "transparent",
-    borderBottomColor: "#FF70BC",
-    borderWidth: 1,
-    marginVertical: 10,
-  },
-  lastReportContainer: {
-    width: 205,
-    borderBottomColor: "#FF70BC",
-    borderWidth: 2,
-    marginVertical: 10,
-  },
-  customLastRapportText: {
-    marginVertical: 20,
-    borderBottomColor: "#FF70BC",
-    borderWidth: 2,
-  },
-  lastReportText: {
-    color: "white",
+  reportText: {
     fontSize: 18,
   },
 });
