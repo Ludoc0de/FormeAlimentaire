@@ -5,6 +5,7 @@ import homeScreen from "./screens/Home";
 import createScreen from "./screens/Create";
 import loginScreen from "./screens/Login";
 import mainScreen from "./screens/Main";
+import goalScreen from "./screens/Goal";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -15,16 +16,12 @@ export default function App() {
         <Stack.Screen name="Create" component={createScreen} />
         <Stack.Screen name="Login" component={loginScreen} />
         <Stack.Screen name="Main" component={mainScreen} />
+        <Stack.Screen name="Goal" component={goalScreen} />
         {/* <Stack.Screen
         name="Login"
         component={loginScreen}
         options={createScreenStyles}
-        />
-        <Stack.Screen
-        name="Main"
-        component={mainScreen}
-        options={mainScreenStyles}
-      /> */}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
