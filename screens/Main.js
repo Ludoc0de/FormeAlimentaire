@@ -80,9 +80,11 @@ export default function Main({ navigation }) {
           onChange={setFat}
         />
         <View style={styles.btnWrapper}>
-          <TouchableOpacity style={styles.button} onPress={onPress}>
-            <Text style={styles.btnText}>Ajouter</Text>
-          </TouchableOpacity>
+          <CustomButton
+            style={styles.button}
+            onPress={onPress}
+            text="Ajouter"
+          />
           <CustomButton
             style={styles.button}
             onPress={() => navigation.navigate("Goal")}
