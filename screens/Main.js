@@ -33,7 +33,7 @@ export default function Main({ navigation }) {
     { label: "7 à 8 fois par semaine", value: 1.7 },
   ];
 
-  const test = Math.round(
+  const maintenance = Math.round(
     (370 + 21.6 * (1 - Number(fat / 100)) * Number(weight)) * Number(activity)
   );
 
@@ -101,7 +101,15 @@ export default function Main({ navigation }) {
           onChange={setActivity}
           items={activityValues}
         />
-        <Text style={styles.title}>{test}</Text>
+        {maintenance ? (
+          <Text style={styles.text}>
+            Vos calories de maintenance sont de : {maintenance} calories
+          </Text>
+        ) : (
+          <Text style={styles.text}>
+            Calorie de maintenance : "en attente de vos données"
+          </Text>
+        )}
         <View style={styles.btnWrapper}>
           <CustomButton
             style={styles.button}
@@ -136,6 +144,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     marginBottom: 40,
+  },
+  text: {
+    fontSize: 18,
+    marginTop: 40,
   },
   // btnWrapper: {
   //   flexDirection: "column",
