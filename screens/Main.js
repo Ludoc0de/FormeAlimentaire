@@ -101,13 +101,14 @@ export default function Main({ navigation }) {
           onChange={setActivity}
           items={activityValues}
         />
+        <Text style={styles.maintenanceLabel}>Calorie de maintenance</Text>
         {maintenance ? (
-          <Text style={styles.text}>
-            Vos calories de maintenance sont de : {maintenance} calories
+          <Text style={[styles.maintenanceText, { fontWeight: "bold" }]}>
+            {maintenance} calories
           </Text>
         ) : (
-          <Text style={styles.text}>
-            Calorie de maintenance : "en attente de vos données"
+          <Text style={styles.maintenanceText}>
+            "en attente de vos données"
           </Text>
         )}
         <View style={styles.btnWrapper}>
@@ -146,8 +147,20 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   text: {
+    fontSize: 16,
+    marginTop: 40,
+  },
+  maintenanceLabel: {
     fontSize: 18,
     marginTop: 40,
+  },
+  maintenanceText: {
+    fontSize: 16,
+    marginTop: 12,
+    width: 350,
+    borderBottomWidth: 2,
+    paddingBottom: 6,
+    marginBottom: 40,
   },
   // btnWrapper: {
   //   flexDirection: "column",
