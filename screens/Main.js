@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from "react-native";
 // const image = require("../assets/wave.png");
 import { getFirestore } from "firebase/firestore";
@@ -21,7 +22,7 @@ export default function Main({ navigation }) {
   const [weight, setWeight] = useState();
   const [fat, setFat] = useState();
   const [activity, setActivity] = useState();
-  // const [weight, setWeight] = useState("");
+  const [goal, setGoal] = useState("");
   const database = getFirestore();
   const userProfile = collection(database, "profile");
   const activityValues = [
@@ -31,6 +32,12 @@ export default function Main({ navigation }) {
     { label: "3 à 5 fois par semaine", value: 1.4 },
     { label: "6 à 7 fois par semaine", value: 1.55 },
     { label: "7 à 8 fois par semaine", value: 1.7 },
+  ];
+
+  const goalChoice = [
+    { label: "Quel est votre objectif ?", value: "" },
+    { label: "Sèche", value: "sèche" },
+    { label: "Masse", value: "masse" },
   ];
 
   const maintenance = Math.round(
@@ -79,7 +86,7 @@ export default function Main({ navigation }) {
     }
   };
   return (
-    <View style={styles.wrapper}>
+    <ScrollView style={styles.wrapper}>
       <View style={styles.container}>
         <Text style={styles.title}>Votre profile</Text>
         <LabeledTextInput label="Nom" value={name} onChange={setName} />
@@ -111,6 +118,29 @@ export default function Main({ navigation }) {
             "en attente de vos données"
           </Text>
         )}
+        <PickerSelect
+          label="Objectif"
+          selectedValue={goal}
+          onChange={setGoal}
+          items={goalChoice}
+        />
+        {goal == "" ? null : goal == "sèche" ? (
+          <Text style={styles.maintenanceText}>Déficit sèche</Text>
+          {/* <LabeledTextInput
+          label="Objectif sèche %"
+          value={dried}
+          onChange={setDried}
+          keyboardType="numeric"
+        /> */}
+        ) : (
+          <Text style={styles.maintenanceText}>Surplus de masse</Text>
+        )}
+        {/* <LabeledTextInput
+          label="Objectif sèche %"
+          value={dried}
+          onChange={setDried}
+          keyboardType="numeric"
+        /> */}
         <View style={styles.btnWrapper}>
           <CustomButton
             style={styles.button}
@@ -124,7 +154,7 @@ export default function Main({ navigation }) {
           />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
