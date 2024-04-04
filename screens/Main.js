@@ -23,6 +23,8 @@ export default function Main({ navigation }) {
   const [fat, setFat] = useState();
   const [activity, setActivity] = useState();
   const [goal, setGoal] = useState("");
+  const [dried, setDried] = useState();
+  const [mass, setMass] = useState();
   const database = getFirestore();
   const userProfile = collection(database, "profile");
   const activityValues = [
@@ -125,22 +127,22 @@ export default function Main({ navigation }) {
           items={goalChoice}
         />
         {goal == "" ? null : goal == "sèche" ? (
-          <Text style={styles.maintenanceText}>Déficit sèche</Text>
-          {/* <LabeledTextInput
-          label="Objectif sèche %"
-          value={dried}
-          onChange={setDried}
-          keyboardType="numeric"
-        /> */}
+          <LabeledTextInput
+            label="Quel est votre objectif sèche %"
+            value={dried}
+            onChange={setDried}
+            keyboardType="numeric"
+            customStyle={{ marginTop: 40 }}
+          />
         ) : (
-          <Text style={styles.maintenanceText}>Surplus de masse</Text>
+          <LabeledTextInput
+            label="Quel est votre objectif masse %"
+            value={mass}
+            onChange={setMass}
+            keyboardType="numeric"
+            customStyle={{ marginTop: 40 }}
+          />
         )}
-        {/* <LabeledTextInput
-          label="Objectif sèche %"
-          value={dried}
-          onChange={setDried}
-          keyboardType="numeric"
-        /> */}
         <View style={styles.btnWrapper}>
           <CustomButton
             style={styles.button}
