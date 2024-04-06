@@ -52,6 +52,10 @@ export default function Main({ navigation }) {
         setName("");
         setWeight("");
         setFat("");
+        setActivity("");
+        setGoal("");
+        setDried("");
+        setMass("");
       };
 
       const auth = getAuth();
