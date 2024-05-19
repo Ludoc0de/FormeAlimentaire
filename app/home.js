@@ -6,37 +6,41 @@ import {
   Image,
   Platform,
 } from "react-native";
-import { auth } from "../firebaseConfig";
-import { getAuth, signOut } from "firebase/auth";
+// import { auth } from "../firebaseConfig";
+// import { getAuth, signOut } from "firebase/auth";
 import { useState } from "react";
-const image = require("../assets/sport01.jpg");
+// const image = require("../assets/sport01.jpg");
 
-export default function Home({ navigation }) {
-  const auth = getAuth();
-  const [user, setUser] = useState(auth.currentUser);
+export default function Home() {
+  //   const auth = getAuth();
+  //   const [user, setUser] = useState(auth.currentUser);
+  const [user, setUser] = useState("ben");
   // console.log(user);
   // const handleLogout = () => {
   //   signOut(auth);
   // };
 
-  const navigateToLogin = () => navigation.navigate("Login");
-  const navigateToMain = () => navigation.navigate("Main");
-  const navigateToCreate = () => navigation.navigate("Create");
+  //   const navigateToLogin = () => navigation.navigate("Login");
+  //   const navigateToMain = () => navigation.navigate("Main");
+  //   const navigateToCreate = () => navigation.navigate("Create");
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Image source={image} style={styles.image} resizeMode="contain" />
+      {/* <Image source={image} style={styles.image} resizeMode="contain" /> */}
       <Text style={styles.title}>Forme Alimentaire!</Text>
       {user ? (
-        <TouchableOpacity onPress={navigateToMain}>
+        // <TouchableOpacity onPress={navigateToMain}>
+        <TouchableOpacity>
           <Text style={styles.btnStyle}>Objectif!</Text>
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity onPress={navigateToLogin}>
+        <TouchableOpacity>
+          {/* <TouchableOpacity onPress={navigateToLogin}> */}
           <Text style={styles.btnStyle}>SE CONNECTER</Text>
         </TouchableOpacity>
       )}
-      <TouchableOpacity onPress={navigateToCreate}>
+      <TouchableOpacity>
+        {/* <TouchableOpacity onPress={navigateToCreate}> */}
         <Text style={styles.btnText}>
           Vous n'avez pas de compte? S'inscrire
         </Text>
